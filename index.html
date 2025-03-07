@@ -101,6 +101,39 @@
             cursor: pointer;
         }
     </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const content = document.querySelectorAll(".page-content");
+        const pagination = document.getElementById("pagination");
+        let currentPage = 0;
+
+        function showPage(page) {
+            content.forEach((el, index) => {
+                el.style.display = index === page ? "block" : "none";
+            });
+
+            document.querySelectorAll(".page-btn").forEach((btn, index) => {
+                btn.classList.toggle("active", index === page);
+            });
+        }
+
+        function createPagination() {
+            content.forEach((_, index) => {
+                const btn = document.createElement("button");
+                btn.innerText = index + 1;
+                btn.classList.add("page-btn");
+                btn.addEventListener("click", () => {
+                    currentPage = index;
+                    showPage(currentPage);
+                });
+                pagination.appendChild(btn);
+            });
+            showPage(0); // Показать первую страницу
+        }
+
+        createPagination();
+    });
+</script>
 </head>
 <body>
 
